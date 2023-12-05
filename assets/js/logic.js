@@ -1,9 +1,8 @@
-var timer;
-var timerCount;
-var initials;
-let startButton = document.querySelector('.start');
+var timer = document.querySelector('.time');
+let startButton = document.getElementById('start');
 let startScreen = document.getElementById('start-screen');
 var quizContainer = document.getElementById('questions');
+var quizContainer = document.getElementById('choices');
 var endScreenContainerContainer = document.getElementById('end-screen');
 var submitButton = document.getElementById('submit');
 
@@ -34,10 +33,25 @@ function runQuiz(questions, quizContainer, endScreenContainer, submitButton) {
 startButton.addEventListener("click", () => {
   startScreen.classList.add("hide");
   quizContainer.classList.remove("hide");
-  runQuiz()
+  runQuiz();
 });
 
+//Timer
+var count = 60;
+$("#time").text(count);
+timer = setTimeout(update, 1000);
+function update() {
+  if (count > 0) {
+    $("#time").text(--count);
+    timer = setTimeout(update, 1000);
+  }
+  else {
+    alert("Out of time!");
+  }
+}
+
 //Present questions function
+/*
 function presentQuestions
   (questions, quizContainer) {
   var questionTitle = [];
@@ -67,6 +81,42 @@ function presentQuestions
 }
 
 presentQuestions(questions, quizContainer);
+*/
+
+//Display quiz
+const quizDisplay = (questionCount) => {
+  let quizCards = document.querySelectorAll(".container-mid");
+  //Hide other cards
+  quizCards.forEach((card) => {
+    card.classList.add("hide");
+  });
+  //display current question card
+  quizCards[questionCount].classList.remove("hide");
+};
+
+function quizCreator() {
+  //generate quiz
+  for (var i = 0; i < questions.length; i++) {
+    let div = document.createElement("div");
+    div.classList.add("container-mid", "hide");
+    //question number
+    countOfQuestion.innerHTML = 1 + " of " + quizArray.length + " Question";
+    //question
+    let question_DIV = document.createElement("p");
+    question_DIV.classList.add("question");
+    question_DIV.innerHTML = i.question;
+    div.appendChild(question_DIV);
+    //options
+    div.innerHTML += `
+    <button class="option-div" onclick="checker(this)">${i.options[0]}</button>
+     <button class="option-div" onclick="checker(this)">${i.options[1]}</button>
+      <button class="option-div" onclick="checker(this)">${i.options[2]}</button>
+       <button class="option-div" onclick="checker(this)">${i.options[3]}</button>
+    `;
+    quizContainer.appendChild(div);
+  }
+}
+
 
 function checkAnswers(questions, quizContainer, endScreenContainer) {
 
@@ -93,4 +143,3 @@ function checkAnswers(questions, quizContainer, endScreenContainer) {
 
 
 }
-* /
