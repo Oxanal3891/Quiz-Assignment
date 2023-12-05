@@ -1,7 +1,9 @@
 var timer;
 var timerCount;
 var initials;
-var score;
+var quizContainer = document.getElementById('questions');
+var endScreenContainerContainer = document.getElementById('end-screen');
+var submitButton = document.getElementById('submit');
 
 // Array of questions and answer choices
 
@@ -71,6 +73,7 @@ var questions = [
   },
 ];
 
+/*
 // Function to run the quiz
 function runQuiz(questions, quizContainer, endScreenContainer, submitButton) {
 
@@ -87,13 +90,13 @@ function runQuiz(questions, quizContainer, endScreenContainer, submitButton) {
 
   presentQuestions(questions, quizContainer);
 
-  showScore(questions, quizContainer, endScreenContainer);
+  checkAnswers(questions, quizContainer, endScreenContainer);
 
   submitButton.onclick = function () {
-    submitScore(score, endScreenContainer);
+    checkAnswers(score, quizContainer, endScreenContainer);
   }
 }
-
+*/
 function presentQuestions
   (questions, quizContainer) {
   var questionTitle = [];
@@ -105,19 +108,48 @@ function presentQuestions
     for (number in questions[i].choices) {
 
       choices.push(
-        '<label>'
+        '<choices button>'
         + '<input type="radio" name="question' + i + '" value="' + number + '">'
         + number + ': '
         + questions[i].choices[number]
-        + '</label>'
+        + '</choices button>'
       );
     }
 
     questionTitle.push(
-      '<div class="question">' + questions[i].question + '</div>'
-      + '<div class="choices">' + choices.join('') + '</div>'
+      '<h2 id="question-title">' + questions[i].question + '</div>'
+      + '<div id="choices">' + choices.join('') + '</div>'
     );
   }
 
   quizContainer.innerHTML = questionTitle.join('');
 }
+
+presentQuestions(questions, quizContainer);
+
+function checkAnswers(questions, quizContainer, endScreenContainer) {
+
+  var choiceContainer = quizContainer.querySelectorAll('.choices');
+  var feedbackContainer = quizContainer.querySelectorAll('.feedback');
+
+  var userAnswer = '';
+  var score = 0;
+
+  for (var i = 0; i < questions.length; i++) {
+
+    userAnswer = (choiceContainer[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+    if (userAnswer === questions[i].correctAnswer) {
+      score++;
+
+      feedbackContainer[i].innerHTML = 'Correct';
+    }
+    else {
+      timerCount = -10;
+      feedbackContainer[i].innerHTML = 'Wrong!';
+    }
+  }
+
+
+}
+
