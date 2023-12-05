@@ -1,14 +1,15 @@
-var timer = document.querySelector('.time');
+let timer = document.querySelector('.time');
 let questions = document.querySelector('#questions');
-
+let questionCount = 0;
+let timerUpdate;
 let startButton = document.getElementById('start');
 let startScreen = document.getElementById('start-screen');
-var quizContainer = document.getElementById('questions');
+let quizContainer = document.getElementById('questions');
 var endScreenContainerContainer = document.getElementById('end-screen');
 var submitButton = document.getElementById('submit');
-var questionCount;
 var initials = document.getElementById('initials');
-var feedback = document.querySelector('.feedback')
+var feedback = document.querySelector('.feedback');
+var goBack;
 
 // Function to run the quiz
 function runQuiz(questions, quizContainer, endScreenContainer, submitButton) {
