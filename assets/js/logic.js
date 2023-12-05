@@ -1,4 +1,5 @@
 let timer = document.querySelector('.time');
+let time = questions.length * 10;
 let questions = document.querySelector('#questions');
 let questionCount = 0;
 let timerUpdate;
@@ -35,11 +36,29 @@ function runQuiz(questions, quizContainer, endScreenContainer, submitButton) {
 }
 
 //Change from the start screen to question on click of a start button and start the quiz
-startButton.addEventListener("click", () => {
-  startScreen.classList.add("hide");
-  quizContainer.classList.remove("hide");
-  runQuiz();
-});
+function startQuiz() {
+  timerUpdate = setInterval(
+    countdown,
+    1000
+  );
+  timer.textContent = time;
+  let startScreen =
+    document.getElementById(
+      'start-screen'
+    );
+  startScreen.setAttribute(
+    'class',
+    'hide'
+  );
+  questions.removeAttribute(
+    'class'
+  );
+  createQuestions();
+}
+
+//Create questions function
+
+
 
 //Timer
 var count = 60;
