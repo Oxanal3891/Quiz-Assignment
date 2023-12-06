@@ -1,6 +1,7 @@
-let timer = document.querySelector('.time');
+let timer = document.querySelector('.timer');
 let time = questions.length * 10;
-let questions = document.querySelector('#questions');
+let questionsEl = document.getElementById('questions');
+let choicesEl = document.getElementById('choices');
 let questionCount = 0;
 let timerUpdate;
 let startButton = document.getElementById('start');
@@ -11,6 +12,8 @@ var submitButton = document.getElementById('submit');
 var initials = document.getElementById('initials');
 var feedback = document.querySelector('.feedback');
 let score = document.getElementById('final-score');
+let highScores = document.querySelector('#view-high-scores');
+
 var goBack;
 
 //Start timer, hide start screen and countdown
@@ -25,7 +28,7 @@ function startQuiz() {
     'class',
     'hide'
   );
-  questions.removeAttribute('class');
+  questionsEl.removeAttribute('class');
   createQuestions();
 };
 
@@ -42,19 +45,15 @@ function countdown() {
 function createQuestions() {
   let questionShowed = questions[questionCount];
   let questionTitle = document.getElementById('question-title');
-  questionTitle.textContent = questionShowed.prompt;
-  choices.innerHTML = '';
-  questionShowed.choices.forEach(
-    function (choice, i) {
-      let choiceButton = document.createElement('button');
-      choiceButton.setAttribute(
-        'value',
-        choice
-      );
-      choiceButton.textContent = i + 1 + '. ' + choice;
-      choiceButton.onclick = questionClick;
-      choices.appendChild(choiceButton);
-    }
+  questionTitle.textContent = questionShowed.question;
+  choicesEl.innerHTML = ' ';
+  questionShowed.choices.forEach(function (choice, i) {
+    let choiceButton = document.createElement('button');
+    choiceButton.setAttribute('value', choice);
+    choiceButton.textContent = i + 1 + '. ' + choice;
+    choiceButton.onclick = checkQuestion;
+    choicesEl.appendChild(choiceButton);
+  }
   );
 }
 
@@ -86,7 +85,7 @@ function finishQuiz() {
   endScreen.removeAttribute('class'
   );
   score.textContent = time;
-  questions.setAttribute(
+  questionsEl.setAttribute(
     'class',
     'hide'
   );
@@ -125,8 +124,17 @@ function saveScore() {
   }
 }
 
+function countdown() {
+  time--;
+  timer.textContent = time;
+  if (time <= 0) {
+    finishQuiz();
+  }
+}
+
 initials.onkeyup = submitScore;
 submitButton.onclick = saveScore;
 
 // Start quiz
 startButton.onclick = startQuiz;
+

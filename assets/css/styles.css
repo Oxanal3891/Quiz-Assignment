@@ -108,7 +108,7 @@ li:nth-child(odd) {
 }
 
 .start-screen,
-.end-screen {
+.score-container {
   position: absolute;
   top: 0;
   width: 100%;
@@ -117,4 +117,31 @@ li:nth-child(odd) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.timer-div {
+  background-color: #e1f5fe;
+  width: 7.5em;
+  border-radius: 1.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7em 1.8em;
+}
+
+.choices-div {
+  font-size: 0.9em;
+  width: 100%;
+  padding: 1em;
+  margin: 0.3em 0;
+  text-align: left;
+  outline: none;
+  background: transparent;
+  border: 1px solid #c0bfd2;
+  border-radius: 0.3em;
+}
+
+.choice-div:disabled {
+  color: #000000;
+  cursor: not-allowed;
 }
