@@ -8,61 +8,61 @@ var questions = [
       'Boolean',
       'whattype'
     ],
-    correctAnswer: '1'
+    correctAnswer: 'typeof'
   },
   {
     question: "Hoisting is the default behaviour of javascript where all declarations are moved _____ before code is executed",
     choices: [
-      '1. bottom',
-      '2. middle',
-      '3. top'
+      'bottom',
+      'middle',
+      'top'
     ],
-    correctAnswer: '3'
+    correctAnswer: 'top'
   },
   {
     question: "A callback is a function that will be executed _____ another function gets executed",
     choices: [
-      '1. after',
-      '2. before',
-      '3. when'
+      'after',
+      'before',
+      'when'
     ],
-    correctAnswer: 'a1'
+    correctAnswer: 'after'
   },
   {
     question: "What is NaN property in JavaScript",
     choices: [
-      '1. Not-a-Number',
-      '2. Not-a-Null',
-      '3. Not-a-Node'
+      'Not-a-Number',
+      'Not-a-Null',
+      'Not-a-Node'
     ],
-    correctAnswer: '1'
+    correctAnswer: 'Not-a-Number'
   },
   {
     question: "In Javascript, what would be the result of 3+2+”7″?",
     choices: [
-      '1. 12',
-      '2. 57',
-      '3. 5'
+      '12',
+      '57',
+      '5'
     ],
-    correctAnswer: '2'
+    correctAnswer: '57'
   },
   {
     question: "Global variables are the variables that are defined _______ functions.",
     choices: [
-      '1. inside of',
-      '2. outside of',
-      '3. with the'
+      'inside of',
+      'outside of',
+      'with the'
     ],
-    correctAnswer: '2'
+    correctAnswer: '2outside of'
   },
   {
     question: "Which company developed JavaScript?",
     choices: [
-      '1. Netscape',
-      '2. Microsoft',
-      '3. Apple'
+      'Netscape',
+      'Microsoft',
+      'Apple'
     ],
-    correctAnswer: '1'
+    correctAnswer: 'Netscape'
   },
 ]
 

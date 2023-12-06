@@ -1,6 +1,4 @@
 
-let scoresBtn = document.querySelector("#scores")
-
 function retriveHighScores() {
     let highscores =
         JSON.parse(
@@ -30,15 +28,13 @@ function retriveHighScores() {
     });
 }
 
-// Clear previous scores when users click clear 
+// Clear previous scores 
 function updateHighScores() {
-    window.localStorage.removeItem(
-        "highscores"
-    );
+    window.localStorage.removeItem('highscores');
     window.location.reload();
-}
-document.getElementById(
-    "clear"
-).onclick = updateHighScores;
+};
+
+document.getElementById('clear').addEventListener('click', updateHighScores);;
 
 retriveHighScores();
+

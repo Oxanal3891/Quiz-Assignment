@@ -1,5 +1,5 @@
 let timer = document.querySelector('.timer');
-let time = questions.length * 10;
+let time = questions.length * 20;
 let questionsEl = document.getElementById('questions');
 let choicesEl = document.getElementById('choices');
 let questionCount = 0;
@@ -8,9 +8,9 @@ let startButton = document.getElementById('start');
 let startScreen = document.getElementById('start-screen');
 let quizContainer = document.getElementById('questions');
 var endScreen = document.getElementById('end-screen');
-var submitButton = document.getElementById('submit');
-var initials = document.getElementById('initials');
-var feedback = document.querySelector('.feedback');
+let submitButton = document.getElementById('submit');
+let initials = document.getElementById('initials');
+var feedback = document.getElementById('feedback');
 let score = document.getElementById('final-score');
 let highScores = document.querySelector('#view-high-scores');
 
@@ -60,40 +60,52 @@ function createQuestions() {
 
 //Function to check answers and deduct 10 seconds if incorrect
 function checkQuestion() {
-  if (this.value !== questions[questionCount].correctAnswer) {
-    time -= 10;
-    if (time < 0) {
-      time = 0
-    } timer.textContent = time;
-    feedback.textContent = 'Wrong!';
-  } else { feedback.textContent = 'Correct!'; }
-  feedback.setAttribute('class', 'feedback');
-  timeout(function () {
-    feedback.setAttribute('class', 'feedback hide');
-  }, 2000);
-  questionCount++;
-  if (questionCount === questions.length) {
+  if (questionCount == questions.length) {
     finishQuiz();
-  } else {
-    createQuestions();
   }
+  else {
+    if (this.value == questions[questionCount].correctAnswer) {
+      feedback.textContent = 'Correct 👍😁😁😁👍!';
+      feedback.setAttribute('class', 'feedback');
+    }
+    else {
+      time -= 10;
+      if (time < 0) {
+        time = 0
+      }
+      timer.textContent = time;
+      feedback.textContent = 'Wrong!';
+      feedback.setAttribute('class', 'feedback');
+    }
+  }
+  questionCount++;
+  setTimeout(function () {
+    feedback.setAttribute(
+      'class',
+      'feedback hide'
+    );
+    createQuestions();
+  }, 1000);
 }
+
+
+
 
 //Finish quiz function
 function finishQuiz() {
-  clearInterval(timerUpdate);
-  endScreen.removeAttribute('class'
-  );
-  score.textContent = time;
   questionsEl.setAttribute(
     'class',
     'hide'
   );
+  clearInterval(timerUpdate);
+  endScreen.removeAttribute('class'
+  );
+  score.textContent = time;
 }
 
 //Submit score function
 function submitScore(event) {
-  if (event.key === 'Enter') {
+  if (event.key === 'Submit') {
     saveScore();
     alert(
       'Your Score has been Submitted'
@@ -124,17 +136,10 @@ function saveScore() {
   }
 }
 
-function countdown() {
-  time--;
-  timer.textContent = time;
-  if (time <= 0) {
-    finishQuiz();
-  }
-}
+
 
 initials.onkeyup = submitScore;
 submitButton.onclick = saveScore;
 
 // Start quiz
 startButton.onclick = startQuiz;
-
